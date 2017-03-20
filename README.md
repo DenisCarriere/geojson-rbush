@@ -36,7 +36,7 @@ $ npm install --save geojson-rbush
 
 ### rbush
 
-GeoJSON implementation of RBush spatial index.
+GeoJSON implementation of [RBush](https://github.com/mourner/rbush#rbush) spatial index.
 
 **Parameters**
 
