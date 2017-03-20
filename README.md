@@ -4,7 +4,7 @@
 [![npm version](https://badge.fury.io/js/geojson-rbush.svg)](https://badge.fury.io/js/geojson-rbush)
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/DenisCarriere/geojson-rbush/master/LICENSE)
 
-GeoJSON implementation of [RBush](https://github.com/mourner/rbush) -- a high-performance JavaScript R-tree-based 2D spatial index for points and rectangles.
+GeoJSON implementation of [RBush](https://github.com/mourner/rbush) — a high-performance JavaScript R-tree-based 2D spatial index for points and rectangles.
 
 ## Install
 
