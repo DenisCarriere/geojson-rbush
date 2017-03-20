@@ -1,0 +1,48 @@
+<meta charset="utf-8">
+<title>GeoJSON RBush</title>
+<script src="geojson-rbush.js"></script>
+
+<h1>Open Console</h1>
+
+<script>
+  var features = {
+    "type": "FeatureCollection",
+    "features": [
+      {
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [[[-78, 41], [-67, 41], [-67, 48], [-78, 48], [-78, 41]]]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [[[-93, 32], [-83, 32], [-83, 39], [-93, 39], [-93, 32]]]
+        }
+      }
+    ]
+  }
+  var point = {
+    "type": "Feature",
+    "properties": {},
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-70, 45]
+    }
+  }
+  var tree = rbush();
+  // Loading Features in bulk
+  tree.load(features);
+  // Loading Features one by one
+  tree.insert(point);
+
+  var search = tree.search(point);
+  console.log(search)
+
+  var collides = tree.collides(point);
+  console.log(collides)
+</script>
