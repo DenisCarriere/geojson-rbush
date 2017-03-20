@@ -1,7 +1,7 @@
 const Benchmark = require('benchmark');
 const random = require('@turf/random');
 const rbush = require('./');
-const suite = new Benchmark.Suite('turf-rbush');
+const suite = new Benchmark.Suite('geojson-rbush');
 
 // Fixtures
 const points = random('points', 3);
@@ -26,6 +26,6 @@ suite
     })
     .add('search.points', () => pointsTree.search(point))
     .add('search.polygons', () => polygonsTree.search(polygon))
-    .on('cycle', e => { console.log(String(e.target)); })
+    .on('cycle', e => console.log(String(e.target)))
     .on('complete', () => {})
     .run();

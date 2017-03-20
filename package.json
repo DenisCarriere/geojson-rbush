@@ -34,7 +34,6 @@
     "Jordan Rousseau <@jvrousseau>"
   ],
   "license": "MIT",
-  "homepage": "https://github.com/Turfjs/turf",
   "devDependencies": {
     "@turf/random": "^3.10.0",
     "@types/geojson": "^1.0.0",
