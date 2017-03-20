@@ -38,26 +38,6 @@ module.exports = function (maxEntries) {
     };
 
     /**
-     * [remove](https://github.com/mourner/rbush#removing-data)
-     *
-     * @param {Feature<any>} feature remove single GeoJSON Feature
-     * @returns {RBush} GeoJSON RBush
-     * @example
-     * var polygon = {
-     *   "type": "Feature",
-     *   "properties": {},
-     *   "geometry": {
-     *     "type": "Polygon",
-     *     "coordinates": [[[-78, 41], [-67, 41], [-67, 48], [-78, 48], [-78, 41]]]
-     *   }
-     * }
-     * tree.remove(polygon)
-     */
-    tree.remove = function (feature) {
-        return rbush.prototype.remove.call(this, feature);
-    };
-
-    /**
      * [load](https://github.com/mourner/rbush#bulk-inserting-data)
      *
      * @param {FeatureCollection<any>} features load entire GeoJSON FeatureCollection
@@ -93,6 +73,37 @@ module.exports = function (maxEntries) {
             load.push(feature);
         });
         return rbush.prototype.load.call(this, load);
+    };
+
+    /**
+     * [remove](https://github.com/mourner/rbush#removing-data)
+     *
+     * @param {Feature<any>} feature remove single GeoJSON Feature
+     * @returns {RBush} GeoJSON RBush
+     * @example
+     * var polygon = {
+     *   "type": "Feature",
+     *   "properties": {},
+     *   "geometry": {
+     *     "type": "Polygon",
+     *     "coordinates": [[[-78, 41], [-67, 41], [-67, 48], [-78, 48], [-78, 41]]]
+     *   }
+     * }
+     * tree.remove(polygon)
+     */
+    tree.remove = function (feature) {
+        return rbush.prototype.remove.call(this, feature);
+    };
+
+    /**
+     * [clear](https://github.com/mourner/rbush#removing-data)
+     *
+     * @returns {RBush} GeoJSON Rbush
+     * @example
+     * tree.clear()
+     */
+    tree.clear = function () {
+        return rbush.prototype.clear.call(this);
     };
 
     /**
@@ -147,6 +158,49 @@ module.exports = function (maxEntries) {
     tree.all = function () {
         var all = rbush.prototype.all.call(this);
         return featureCollection(all);
+    };
+
+    /**
+     * [toJSON](https://github.com/mourner/rbush#export-and-import)
+     *
+     * @returns {any} export data as JSON object
+     * @example
+     * var exported = tree.toJSON()
+     * //=JSON object
+     */
+    tree.toJSON = function () {
+        return rbush.prototype.toJSON.call(this);
+    };
+
+    /**
+     * [fromJSON](https://github.com/mourner/rbush#export-and-import)
+     *
+     * @param {any} json import previously exported data
+     * @returns {RBush} GeoJSON RBush
+     * @example
+     * var exported = {
+     *   "children": [
+     *     {
+     *       "type": "Feature",
+     *       "geometry": {
+     *         "type": "Point",
+     *         "coordinates": [110, 50]
+     *       },
+     *       "properties": {},
+     *       "bbox": [110, 50, 110, 50]
+     *     }
+     *   ],
+     *   "height": 1,
+     *   "leaf": true,
+     *   "minX": 110,
+     *   "minY": 50,
+     *   "maxX": 110,
+     *   "maxY": 50
+     * }
+     * tree.fromJSON(exported)
+     */
+    tree.fromJSON = function (json) {
+        return rbush.prototype.fromJSON.call(this, json);
     };
 
     /**

@@ -28,11 +28,14 @@ $ npm install --save geojson-rbush
 
 -   [rbush](#rbush)
 -   [insert](#insert)
--   [remove](#remove)
 -   [load](#load)
+-   [remove](#remove)
+-   [clear](#clear)
 -   [search](#search)
 -   [collides](#collides)
 -   [all](#all)
+-   [toJSON](#tojson)
+-   [fromJSON](#fromjson)
 
 ### rbush
 
@@ -76,30 +79,6 @@ tree.insert(polygon)
 
 Returns **RBush** GeoJSON RBush
 
-### remove
-
-[remove](https://github.com/mourner/rbush#removing-data)
-
-**Parameters**
-
--   `feature` **Feature&lt;any>** remove single GeoJSON Feature
-
-**Examples**
-
-```javascript
-var polygon = {
-  "type": "Feature",
-  "properties": {},
-  "geometry": {
-    "type": "Polygon",
-    "coordinates": [[[-78, 41], [-67, 41], [-67, 48], [-78, 48], [-78, 41]]]
-  }
-}
-tree.remove(polygon)
-```
-
-Returns **RBush** GeoJSON RBush
-
 ### load
 
 [load](https://github.com/mourner/rbush#bulk-inserting-data)
@@ -136,6 +115,42 @@ tree.load(polygons)
 ```
 
 Returns **RBush** GeoJSON RBush
+
+### remove
+
+[remove](https://github.com/mourner/rbush#removing-data)
+
+**Parameters**
+
+-   `feature` **Feature&lt;any>** remove single GeoJSON Feature
+
+**Examples**
+
+```javascript
+var polygon = {
+  "type": "Feature",
+  "properties": {},
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [[[-78, 41], [-67, 41], [-67, 48], [-78, 48], [-78, 41]]]
+  }
+}
+tree.remove(polygon)
+```
+
+Returns **RBush** GeoJSON RBush
+
+### clear
+
+[clear](https://github.com/mourner/rbush#removing-data)
+
+**Examples**
+
+```javascript
+tree.clear()
+```
+
+Returns **RBush** GeoJSON Rbush
 
 ### search
 
@@ -197,3 +212,51 @@ tree.all()
 ```
 
 Returns **FeatureCollection&lt;any>** all the features in RBush
+
+### toJSON
+
+[toJSON](https://github.com/mourner/rbush#export-and-import)
+
+**Examples**
+
+```javascript
+var exported = tree.toJSON()
+//=JSON object
+```
+
+Returns **any** export data as JSON object
+
+### fromJSON
+
+[fromJSON](https://github.com/mourner/rbush#export-and-import)
+
+**Parameters**
+
+-   `json` **any** import previously exported data
+
+**Examples**
+
+```javascript
+var exported = {
+  "children": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [110, 50]
+      },
+      "properties": {},
+      "bbox": [110, 50, 110, 50]
+    }
+  ],
+  "height": 1,
+  "leaf": true,
+  "minX": 110,
+  "minY": 50,
+  "maxX": 110,
+  "maxY": 50
+}
+tree.fromJSON(exported)
+```
+
+Returns **RBush** GeoJSON RBush
