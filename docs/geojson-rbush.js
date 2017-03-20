@@ -1666,7 +1666,7 @@ var featureEach = index$4.featureEach;
 
 
 /**
- * GeoJSON implementation of RBush spatial index.
+ * GeoJSON implementation of [RBush](https://github.com/mourner/rbush#rbush) spatial index.
  *
  * @name rbush
  * @param {number} [maxEntries=9] defines the maximum number of entries in a tree node. 9 (used by default) is a

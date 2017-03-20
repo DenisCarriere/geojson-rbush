@@ -51,6 +51,7 @@
     "rollup-plugin-node-globals": "^1.1.0",
     "rollup-plugin-node-resolve": "^2.0.0",
     "tape": "^4.6.3",
+    "uglifyjs": "^2.4.10",
     "write-json-file": "^2.0.0"
   },
   "dependencies": {
