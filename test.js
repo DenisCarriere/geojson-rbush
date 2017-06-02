@@ -1,5 +1,5 @@
-const test = require('tape');
 const fs = require('fs');
+const {test} = require('tap');
 const path = require('path');
 const load = require('load-json-file');
 const write = require('write-json-file');
@@ -37,5 +37,13 @@ test('geojson-rbush', t => {
         t.deepEqual(all, load.sync(directories.out + 'all.' + filename), 'all.' + name);
         t.deepEqual(search, load.sync(directories.out + 'search.' + filename), 'search.' + name);
     }
+    t.end();
+});
+
+test('geojson-rbush -- bbox', t => {
+    const tree = rbush();
+    tree.insert([-150, -60, 150, 60]);
+    t.equal(tree.collides([-140, -50, 140, 50]), true);
+    t.equal(tree.collides([-180, -80, -170, -60]), false);
     t.end();
 });

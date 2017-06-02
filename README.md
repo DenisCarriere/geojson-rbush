@@ -85,7 +85,7 @@ Returns **RBush** GeoJSON RBush
 
 **Parameters**
 
--   `features` **FeatureCollection&lt;any>** load entire GeoJSON FeatureCollection
+-   `features` **([Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;BBox> | FeatureCollection&lt;any>)** load entire GeoJSON FeatureCollection
 
 **Examples**
 
@@ -122,7 +122,7 @@ Returns **RBush** GeoJSON RBush
 
 **Parameters**
 
--   `feature` **Feature&lt;any>** remove single GeoJSON Feature
+-   `feature` **(BBox | Feature&lt;any>)** remove single GeoJSON Feature
 
 **Examples**
 
@@ -158,7 +158,7 @@ Returns **RBush** GeoJSON Rbush
 
 **Parameters**
 
--   `geojson` **(FeatureCollection | Feature&lt;any>)** search with GeoJSON
+-   `geojson` **(BBox | FeatureCollection | Feature&lt;any>)** search with GeoJSON
 
 **Examples**
 
@@ -182,7 +182,7 @@ Returns **FeatureCollection&lt;any>** all features that intersects with the give
 
 **Parameters**
 
--   `geojson` **(FeatureCollection | Feature&lt;any>)** collides with GeoJSON
+-   `geojson` **(BBox | FeatureCollection | Feature&lt;any>)** collides with GeoJSON
 
 **Examples**
 

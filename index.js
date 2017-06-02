@@ -1,6 +1,7 @@
 var turfBBox = require('@turf/bbox');
 var featureCollection = require('@turf/helpers').featureCollection;
 var featureEach = require('@turf/meta').featureEach;
+var bboxPolygon = require('@turf/bbox-polygon');
 var rbush = require('rbush');
 
 /**
@@ -33,14 +34,20 @@ module.exports = function (maxEntries) {
      * tree.insert(polygon)
      */
     tree.insert = function (feature) {
-        feature.bbox = feature.bbox ? feature.bbox : turfBBox(feature);
+        if (Array.isArray(feature)) {
+            const bbox = feature;
+            feature = bboxPolygon(bbox);
+            feature.bbox = bbox;
+        } else {
+            feature.bbox = feature.bbox ? feature.bbox : turfBBox(feature);
+        }
         return rbush.prototype.insert.call(this, feature);
     };
 
     /**
      * [load](https://github.com/mourner/rbush#bulk-inserting-data)
      *
-     * @param {FeatureCollection<any>} features load entire GeoJSON FeatureCollection
+     * @param {BBox[]|FeatureCollection<any>} features load entire GeoJSON FeatureCollection
      * @returns {RBush} GeoJSON RBush
      * @example
      * var polygons = {
@@ -68,17 +75,27 @@ module.exports = function (maxEntries) {
      */
     tree.load = function (features) {
         var load = [];
-        featureEach(features, function (feature) {
-            feature.bbox = feature.bbox ? feature.bbox : turfBBox(feature);
-            load.push(feature);
-        });
+        // Load an Array of BBox
+        if (Array.isArray(features)) {
+            features.forEach(function (bbox) {
+                const feature = bboxPolygon(bbox);
+                feature.bbox = bbox;
+                load.push(feature);
+            });
+        } else {
+            // Load FeatureCollection
+            featureEach(features, function (feature) {
+                feature.bbox = feature.bbox ? feature.bbox : turfBBox(feature);
+                load.push(feature);
+            });
+        }
         return rbush.prototype.load.call(this, load);
     };
 
     /**
      * [remove](https://github.com/mourner/rbush#removing-data)
      *
-     * @param {Feature<any>} feature remove single GeoJSON Feature
+     * @param {BBox|Feature<any>} feature remove single GeoJSON Feature
      * @returns {RBush} GeoJSON RBush
      * @example
      * var polygon = {
@@ -92,6 +109,11 @@ module.exports = function (maxEntries) {
      * tree.remove(polygon)
      */
     tree.remove = function (feature) {
+        if (Array.isArray(feature)) {
+            const bbox = feature;
+            feature = bboxPolygon(bbox);
+            feature.bbox = bbox;
+        }
         return rbush.prototype.remove.call(this, feature);
     };
 
@@ -109,7 +131,7 @@ module.exports = function (maxEntries) {
     /**
      * [search](https://github.com/mourner/rbush#search)
      *
-     * @param {FeatureCollection|Feature<any>} geojson search with GeoJSON
+     * @param {BBox|FeatureCollection|Feature<any>} geojson search with GeoJSON
      * @returns {FeatureCollection<any>} all features that intersects with the given GeoJSON.
      * @example
      * var polygon = {
@@ -130,7 +152,7 @@ module.exports = function (maxEntries) {
     /**
      * [collides](https://github.com/mourner/rbush#collisions)
      *
-     * @param {FeatureCollection|Feature<any>} geojson collides with GeoJSON
+     * @param {BBox|FeatureCollection|Feature<any>} geojson collides with GeoJSON
      * @returns {boolean} true if there are any items intersecting the given GeoJSON, otherwise false.
      * @example
      * var polygon = {
@@ -207,11 +229,15 @@ module.exports = function (maxEntries) {
      * Converts GeoJSON to {minX, minY, maxX, maxY} schema
      *
      * @private
-     * @param {FeatureCollectio|Feature<any>} geojson feature(s) to retrieve BBox from
+     * @param {BBox|FeatureCollectio|Feature<any>} geojson feature(s) to retrieve BBox from
      * @returns {Object} converted to {minX, minY, maxX, maxY}
      */
     tree.toBBox = function (geojson) {
-        var bbox = geojson.bbox ? geojson.bbox : turfBBox(geojson);
+        var bbox;
+        if (geojson.bbox) bbox = geojson.bbox;
+        else if (Array.isArray(geojson) && geojson.length === 4) bbox = geojson;
+        else bbox = turfBBox(geojson);
+
         return {
             minX: bbox[0],
             minY: bbox[1],
