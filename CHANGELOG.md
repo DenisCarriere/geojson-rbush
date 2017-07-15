@@ -1,6 +1,10 @@
 
 # Changelog
 
+## 1.1.1 - 2017-07-15
+
+- Replaced `const` with `var` for pure ES5 compatibility
+
 ## 1.1.0 - 2017-06-01
 
 - Add `bbox` support as valid input

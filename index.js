@@ -35,7 +35,7 @@ module.exports = function (maxEntries) {
      */
     tree.insert = function (feature) {
         if (Array.isArray(feature)) {
-            const bbox = feature;
+            var bbox = feature;
             feature = bboxPolygon(bbox);
             feature.bbox = bbox;
         } else {
@@ -78,7 +78,7 @@ module.exports = function (maxEntries) {
         // Load an Array of BBox
         if (Array.isArray(features)) {
             features.forEach(function (bbox) {
-                const feature = bboxPolygon(bbox);
+                var feature = bboxPolygon(bbox);
                 feature.bbox = bbox;
                 load.push(feature);
             });
@@ -110,7 +110,7 @@ module.exports = function (maxEntries) {
      */
     tree.remove = function (feature) {
         if (Array.isArray(feature)) {
-            const bbox = feature;
+            var bbox = feature;
             feature = bboxPolygon(bbox);
             feature.bbox = bbox;
         }
