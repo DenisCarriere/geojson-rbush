@@ -1,8 +1,7 @@
-var turfBBox = require('@turf/bbox');
-var featureCollection = require('@turf/helpers').featureCollection;
-var featureEach = require('@turf/meta').featureEach;
-var bboxPolygon = require('@turf/bbox-polygon');
 var rbush = require('rbush');
+var meta = require('@turf/meta');
+var featureEach = meta.featureEach;
+var coordEach = meta.coordEach;
 
 /**
  * GeoJSON implementation of [RBush](https://github.com/mourner/rbush#rbush) spatial index.
@@ -145,8 +144,11 @@ module.exports = function (maxEntries) {
      * tree.search(polygon)
      */
     tree.search = function (geojson) {
-        var search = rbush.prototype.search.call(this, this.toBBox(geojson));
-        return featureCollection(search);
+        var features = rbush.prototype.search.call(this, this.toBBox(geojson));
+        return {
+            type: 'FeatureCollection',
+            features: features
+        };
     };
 
     /**
@@ -178,8 +180,11 @@ module.exports = function (maxEntries) {
      * //=FeatureCollection
      */
     tree.all = function () {
-        var all = rbush.prototype.all.call(this);
-        return featureCollection(all);
+        var features = rbush.prototype.all.call(this);
+        return {
+            type: 'FeatureCollection',
+            features: features
+        };
     };
 
     /**
@@ -247,3 +252,62 @@ module.exports = function (maxEntries) {
     };
     return tree;
 };
+
+/**
+ * Takes a bbox and returns an equivalent {@link Polygon|polygon}.
+ *
+ * @private
+ * @name bboxPolygon
+ * @param {Array<number>} bbox extent in [minX, minY, maxX, maxY] order
+ * @returns {Feature<Polygon>} a Polygon representation of the bounding box
+ * @example
+ * var bbox = [0, 0, 10, 10];
+ *
+ * var poly = turf.bboxPolygon(bbox);
+ *
+ * //addToMap
+ * var addToMap = [poly]
+ */
+function bboxPolygon(bbox) {
+    var lowLeft = [bbox[0], bbox[1]];
+    var topLeft = [bbox[0], bbox[3]];
+    var topRight = [bbox[2], bbox[3]];
+    var lowRight = [bbox[2], bbox[1]];
+    var coordinates = [[lowLeft, lowRight, topRight, topLeft, lowLeft]];
+
+    return {
+        type: 'Feature',
+        bbox: bbox,
+        properties: {},
+        geometry: {
+            type: 'Polygon',
+            coordinates: coordinates
+        }
+    };
+}
+
+/**
+ * Takes a set of features, calculates the bbox of all input features, and returns a bounding box.
+ *
+ * @private
+ * @name bbox
+ * @param {FeatureCollection|Feature<any>} geojson input features
+ * @returns {Array<number>} bbox extent in [minX, minY, maxX, maxY] order
+ * @example
+ * var line = turf.lineString([[-74, 40], [-78, 42], [-82, 35]]);
+ * var bbox = turf.bbox(line);
+ * var bboxPolygon = turf.bboxPolygon(bbox);
+ *
+ * //addToMap
+ * var addToMap = [line, bboxPolygon]
+ */
+function turfBBox(geojson) {
+    var bbox = [Infinity, Infinity, -Infinity, -Infinity];
+    coordEach(geojson, function (coord) {
+        if (bbox[0] > coord[0]) bbox[0] = coord[0];
+        if (bbox[1] > coord[1]) bbox[1] = coord[1];
+        if (bbox[2] < coord[0]) bbox[2] = coord[0];
+        if (bbox[3] < coord[1]) bbox[3] = coord[1];
+    });
+    return bbox;
+}
