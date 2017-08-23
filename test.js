@@ -1,5 +1,5 @@
 const fs = require('fs');
-const {test} = require('tap');
+const test = require('tap').test;
 const path = require('path');
 const load = require('load-json-file');
 const write = require('write-json-file');
@@ -19,7 +19,10 @@ const fixtures = fs.readdirSync(directories.in).map(filename => {
 });
 
 test('geojson-rbush', t => {
-    for (const {name, filename, geojson} of fixtures) {
+    for (const fixture of fixtures) {
+        const name = fixture.name;
+        const filename = fixture.filename;
+        const geojson = fixture.geojson;
         const tree = rbush();
         tree.load(geojson);
 
