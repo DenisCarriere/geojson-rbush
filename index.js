@@ -1,7 +1,5 @@
-var rbush = require('rbush');
-var meta = require('@turf/meta');
-var featureEach = meta.featureEach;
-var coordEach = meta.coordEach;
+import rbush from './rbush';
+import {featureEach, coordEach} from '@turf/meta';
 
 /**
  * GeoJSON implementation of [RBush](https://github.com/mourner/rbush#rbush) spatial index.
@@ -14,7 +12,7 @@ var coordEach = meta.coordEach;
  * var rbush = require('geojson-rbush')
  * var tree = rbush()
  */
-module.exports = function (maxEntries) {
+export default function geojsonRbush(maxEntries) {
     var tree = rbush(maxEntries);
     /**
      * [insert](https://github.com/mourner/rbush#data-format)
@@ -251,7 +249,7 @@ module.exports = function (maxEntries) {
         };
     };
     return tree;
-};
+}
 
 /**
  * Takes a bbox and returns an equivalent {@link Polygon|polygon}.

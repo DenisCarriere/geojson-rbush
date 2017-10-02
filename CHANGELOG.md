@@ -1,6 +1,10 @@
 
 # Changelog
 
+## 2.0.0 - 2017-10-01
+
+- Support ES modules
+
 ## 1.1.1 - 2017-07-15
 
 - Replaced `const` with `var` for pure ES5 compatibility
