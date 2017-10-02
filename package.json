@@ -1,6 +1,6 @@
 {
   "name": "geojson-rbush",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "GeoJSON implementation of RBush",
   "main": "main.js",
   "module": "index.js",
@@ -9,7 +9,9 @@
   "files": [
     "index.js",
     "index.d.ts",
-    "main.js"
+    "main.js",
+    "quickselect.js",
+    "rbush.js"
   ],
   "scripts": {
     "prepublish": "rollup -c rollup.config.js",
