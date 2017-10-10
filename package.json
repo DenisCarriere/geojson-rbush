@@ -1,20 +1,14 @@
 {
   "name": "geojson-rbush",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "GeoJSON implementation of RBush",
-  "main": "main",
-  "module": "index",
-  "jsnext:main": "index",
+  "main": "index",
   "types": "index.d.ts",
   "files": [
     "index.js",
-    "index.d.ts",
-    "main.js",
-    "quickselect.js",
-    "rbush.js"
+    "index.d.ts"
   ],
   "scripts": {
-    "prepublish": "rollup -c rollup.config.js",
     "pretest": "eslint index.js",
     "test": "tap test.js",
     "bench": "node bench.js",
@@ -47,6 +41,7 @@
   },
   "dependencies": {
     "@turf/helpers": "*",
-    "@turf/meta": "*"
+    "@turf/meta": "*",
+    "rbush": "*"
   }
 }

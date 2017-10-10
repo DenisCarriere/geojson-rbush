@@ -1,6 +1,6 @@
 import { BBox, Feature, FeatureCollection, GeometryObject, FeatureGeometryCollection, GeometryCollection } from '@turf/helpers'
 
-export declare class RBush {
+declare class RBush {
     insert(feature: Feature<any> | GeometryObject | BBox): RBush;
     load(features: FeatureCollection<any> | FeatureGeometryCollection | GeometryCollection | BBox[]): RBush;
     remove<T extends Feature<any> | GeometryObject | BBox>(feature: T, equals?: (a: T, b: T) => boolean): RBush;
@@ -16,3 +16,4 @@ export declare class RBush {
  * https://github.com/mourner/rbush
  */
 export default function rbush(maxEntries?: number): RBush;
+

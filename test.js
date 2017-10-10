@@ -3,7 +3,7 @@ const test = require('tap').test;
 const path = require('path');
 const load = require('load-json-file');
 const write = require('write-json-file');
-const rbush = require('./');
+const rbush = require('./').default;
 
 const directories = {
     in: path.join(__dirname, 'test', 'in') + path.sep,
