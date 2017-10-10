@@ -1,6 +1,10 @@
 
 # Changelog
 
+## 2.0.2 - 2017-10-10
+
+- Update Typescript definition
+
 ## 2.0.0 - 2017-10-01
 
 - Support ES modules

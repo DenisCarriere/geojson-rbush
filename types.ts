@@ -1,8 +1,8 @@
-import {point, polygon, featureCollection} from '@turf/helpers'
-import * as rbush from './'
+import { BBox, point, polygon, featureCollection} from '@turf/helpers'
+import rbush from './'
 
 // Fixtures
-const bbox = [-180, -90, 180, 90]
+const bbox: BBox = [-180, -90, 180, 90]
 const pt = point([0, 0])
 const points = featureCollection([pt, pt])
 const poly = polygon([[[0, 0], [1, 1], [1, 1], [0, 0]]])

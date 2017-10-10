@@ -1,17 +1,13 @@
-/// <reference types="geojson" />
-
-export type BBox = number[]
-export type Feature = GeoJSON.Feature<any> | GeoJSON.GeometryObject
-export type Features = GeoJSON.FeatureCollection<any> | GeoJSON.GeometryCollection
+import { BBox, Feature, FeatureCollection, GeometryObject, FeatureGeometryCollection, GeometryCollection } from '@turf/helpers'
 
 export declare class RBush {
-    insert(feature: Feature | BBox): RBush;
-    load(features: Features | BBox[]): RBush;
-    remove(feature: Feature | BBox, equals?: (a: Feature, b: Feature) => boolean): RBush;
+    insert(feature: Feature<any> | GeometryObject | BBox): RBush;
+    load(features: FeatureCollection<any> | FeatureGeometryCollection | GeometryCollection | BBox[]): RBush;
+    remove<T extends Feature<any> | GeometryObject | BBox>(feature: T, equals?: (a: T, b: T) => boolean): RBush;
     clear(): RBush;
-    search(geojson: Feature | Features | BBox): Features;
-    all(): Features;
-    collides(geosjon: Feature | Features | BBox): boolean;
+    search<Geom extends GeometryObject>(geojson: Feature<Geom> | FeatureCollection<Geom> | BBox): FeatureCollection<Geom>;
+    all(): FeatureCollection<any>;
+    collides(geosjon: Feature<any> | FeatureCollection<any> | GeometryCollection | FeatureGeometryCollection | BBox): boolean;
     toJSON(): any;
     fromJSON(data: any): RBush;
 }

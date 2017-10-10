@@ -1,6 +1,6 @@
 {
   "name": "geojson-rbush",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "GeoJSON implementation of RBush",
   "main": "main.js",
   "module": "index.js",
@@ -46,6 +46,7 @@
     "write-json-file": "*"
   },
   "dependencies": {
+    "@turf/helpers": "*",
     "@turf/meta": "*"
   }
 }
