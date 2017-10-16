@@ -43,8 +43,8 @@ GeoJSON implementation of [RBush](https://github.com/mourner/rbush#rbush) spatia
 **Examples**
 
 ```javascript
-var rbush = require('geojson-rbush')
-var tree = rbush()
+import geojsonRbush from 'geojson-rbush';
+var tree = geojsonRbush();
 ```
 
 Returns **RBush** GeoJSON RBush

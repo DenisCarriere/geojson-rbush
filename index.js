@@ -1,10 +1,5 @@
-var rbush = require('rbush');
-var meta = require('@turf/meta');
-var featureEach = meta.featureEach;
-var coordEach = meta.coordEach;
-
-module.exports = geojsonRbush;
-module.exports.default = geojsonRbush;
+import rbush from './rbush';
+import {featureEach, coordEach} from '@turf/meta';
 
 /**
  * GeoJSON implementation of [RBush](https://github.com/mourner/rbush#rbush) spatial index.
@@ -14,8 +9,8 @@ module.exports.default = geojsonRbush;
  * reasonable choice for most applications. Higher value means faster insertion and slower search, and vice versa.
  * @returns {RBush} GeoJSON RBush
  * @example
- * var rbush = require('geojson-rbush')
- * var tree = rbush()
+ * import geojsonRbush from 'geojson-rbush';
+ * var tree = geojsonRbush();
  */
 function geojsonRbush(maxEntries) {
     var tree = rbush(maxEntries);
@@ -314,3 +309,5 @@ function turfBBox(geojson) {
     });
     return bbox;
 }
+
+export default geojsonRbush;

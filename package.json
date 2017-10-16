@@ -1,16 +1,22 @@
 {
   "name": "geojson-rbush",
-  "version": "2.0.4",
+  "version": "2.1.0",
   "description": "GeoJSON implementation of RBush",
-  "main": "index",
+  "main": "main",
+  "module": "index",
+  "jsnext:main": "index",
   "types": "index.d.ts",
   "files": [
     "index.js",
-    "index.d.ts"
+    "index.d.ts",
+    "main.js",
+    "rbush.js",
+    "quickselect.js"
   ],
   "scripts": {
-    "pretest": "eslint index.js",
+    "pretest": "rollup -c rollup.config.js",
     "test": "tap test.js",
+    "posttest": "eslint index.js",
     "bench": "node bench.js",
     "docs": "documentation readme index.js --shallow --section=API --markdown-toc"
   },
@@ -36,6 +42,8 @@
     "eslint": "*",
     "eslint-config-mourner": "*",
     "load-json-file": "*",
+    "rollup": "^0.50.0",
+    "rollup-plugin-node-resolve": "^3.0.0",
     "tap": "*",
     "write-json-file": "*"
   },

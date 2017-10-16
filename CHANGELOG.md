@@ -1,9 +1,13 @@
 
 # Changelog
 
+## 2.1.0 - 2017-10-16
+
+- Added Rollup to build CommonJS (`main.js`)
+
 ## 2.0.4 - 2017-10-10
 
-- Drop Rollup
+- ~Drop Rollup~
 - Update Typescript definition
 
 ## 2.0.0 - 2017-10-01

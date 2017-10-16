@@ -3,7 +3,7 @@ const test = require('tap').test;
 const path = require('path');
 const load = require('load-json-file');
 const write = require('write-json-file');
-const rbush = require('./').default;
+const geojsonRbush = require('./');
 
 const directories = {
     in: path.join(__dirname, 'test', 'in') + path.sep,
@@ -23,7 +23,7 @@ test('geojson-rbush', t => {
         const name = fixture.name;
         const filename = fixture.filename;
         const geojson = fixture.geojson;
-        const tree = rbush();
+        const tree = geojsonRbush();
         tree.load(geojson);
 
         // Retrive all features inside the RBush index
@@ -44,7 +44,7 @@ test('geojson-rbush', t => {
 });
 
 test('geojson-rbush -- bbox', t => {
-    const tree = rbush();
+    const tree = geojsonRbush();
     tree.insert([-150, -60, 150, 60]);
     t.equal(tree.collides([-140, -50, 140, 50]), true);
     t.equal(tree.collides([-180, -80, -170, -60]), false);
