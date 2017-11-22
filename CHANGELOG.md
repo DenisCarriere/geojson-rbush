@@ -1,6 +1,10 @@
 
 # Changelog
 
+## 2.2.0 - 2017-11-22
+
+- Clean up Rollup build
+
 ## 2.1.0 - 2017-10-16
 
 - Added Rollup to build CommonJS (`main.js`)
