@@ -10,8 +10,7 @@
     "index.d.ts",
     "index.js",
     "main.js",
-    "rbush.js",
-    "quickselect.js"
+    "lib"
   ],
   "scripts": {
     "pretest": "rollup -f cjs -o main.js index.js",
@@ -35,6 +34,8 @@
   "devDependencies": {
     "@turf/random": "*",
     "benchmark": "*",
+    "eslint": "*",
+    "eslint-config-mourner": "*",
     "load-json-file": "*",
     "rollup": "*",
     "tape": "*",

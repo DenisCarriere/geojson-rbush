@@ -1,4 +1,4 @@
-import rbush from './rbush';
+import rbush from './lib/rbush';
 import {featureEach, coordEach} from '@turf/meta';
 
 /**
@@ -12,7 +12,7 @@ import {featureEach, coordEach} from '@turf/meta';
  * import rbush from 'geojson-rbush';
  * const tree = rbush();
  */
-function geojsonRbush (maxEntries) {
+function geojsonRbush(maxEntries) {
     var tree = rbush(maxEntries);
     /**
      * [insert](https://github.com/mourner/rbush#data-format)
