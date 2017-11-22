@@ -9,10 +9,10 @@ import {featureEach, coordEach} from '@turf/meta';
  * reasonable choice for most applications. Higher value means faster insertion and slower search, and vice versa.
  * @returns {RBush} GeoJSON RBush
  * @example
- * import geojsonRbush from 'geojson-rbush';
- * var tree = geojsonRbush();
+ * import rbush from 'geojson-rbush';
+ * const tree = rbush();
  */
-function geojsonRbush(maxEntries) {
+function geojsonRbush (maxEntries) {
     var tree = rbush(maxEntries);
     /**
      * [insert](https://github.com/mourner/rbush#data-format)

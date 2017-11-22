@@ -3,7 +3,6 @@ function quickselect(arr, k, left, right, compare) {
 }
 
 function quickselectStep(arr, k, left, right, compare) {
-
     while (right > left) {
         if (right - left > 600) {
             var n = right - left + 1;

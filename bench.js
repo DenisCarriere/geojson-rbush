@@ -1,12 +1,12 @@
 const Benchmark = require('benchmark');
-const random = require('@turf/random');
+const {randomPoint, randomPolygon} = require('@turf/random');
 const rbush = require('./');
 const suite = new Benchmark.Suite('geojson-rbush');
 
 // Fixtures
-const points = random('points', 3);
+const points = randomPoint(3);
 const point = points.features[0];
-const polygons = random('polygons', 3);
+const polygons = randomPolygon(3);
 const polygon = polygons.features[0];
 
 // Load trees before (used to benchmark search)

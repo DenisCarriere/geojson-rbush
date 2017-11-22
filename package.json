@@ -7,18 +7,16 @@
   "jsnext:main": "index",
   "types": "index.d.ts",
   "files": [
-    "index.js",
     "index.d.ts",
+    "index.js",
     "main.js",
     "rbush.js",
     "quickselect.js"
   ],
   "scripts": {
-    "pretest": "rollup -c rollup.config.js",
-    "test": "tap test.js",
-    "posttest": "eslint index.js",
-    "bench": "node bench.js",
-    "docs": "documentation readme index.js --shallow --section=API --markdown-toc"
+    "pretest": "rollup -f cjs -o main.js index.js",
+    "test": "node test.js",
+    "bench": "node bench.js"
   },
   "keywords": [
     "geojson",
@@ -35,21 +33,14 @@
   ],
   "license": "MIT",
   "devDependencies": {
-    "@types/geojson": "*",
-    "@types/rbush": "*",
+    "@turf/random": "*",
     "benchmark": "*",
-    "documentation": "*",
-    "eslint": "*",
-    "eslint-config-mourner": "*",
     "load-json-file": "*",
-    "rollup": "^0.50.0",
-    "rollup-plugin-node-resolve": "^3.0.0",
-    "tap": "*",
+    "rollup": "*",
+    "tape": "*",
     "write-json-file": "*"
   },
   "dependencies": {
-    "@turf/helpers": "*",
-    "@turf/meta": "*",
-    "rbush": "*"
+    "@turf/meta": "*"
   }
 }
