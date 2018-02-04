@@ -1,13 +1,13 @@
-import { BBox, Feature, FeatureCollection, GeometryObject, FeatureGeometryCollection, GeometryCollection } from '@turf/helpers'
+import { BBox, Feature, FeatureCollection, Geometry } from '@turf/helpers'
 
 declare class RBush {
-    insert(feature: Feature<any> | GeometryObject | BBox): RBush;
-    load(features: FeatureCollection<any> | FeatureGeometryCollection | GeometryCollection | BBox[]): RBush;
-    remove<T extends Feature<any> | GeometryObject | BBox>(feature: T, equals?: (a: T, b: T) => boolean): RBush;
+    insert(feature: Feature<any> | Geometry | BBox): RBush;
+    load(features: FeatureCollection<any> | BBox[]): RBush;
+    remove<T extends Feature<any> | Geometry | BBox>(feature: T, equals?: (a: T, b: T) => boolean): RBush;
     clear(): RBush;
-    search<Geom extends GeometryObject>(geojson: Feature<Geom> | FeatureCollection<Geom> | BBox): FeatureCollection<Geom>;
+    search<G extends Geometry>(geojson: Feature<G> | FeatureCollection<G> | BBox): FeatureCollection<G>;
     all(): FeatureCollection<any>;
-    collides(geosjon: Feature<any> | FeatureCollection<any> | GeometryCollection | FeatureGeometryCollection | BBox): boolean;
+    collides(geosjon: Feature<any> | FeatureCollection<any> | BBox): boolean;
     toJSON(): any;
     fromJSON(data: any): RBush;
 }

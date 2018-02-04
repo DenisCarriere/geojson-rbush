@@ -1,6 +1,11 @@
 
 # Changelog
 
+## 3.0.0 - 2018-02-04
+
+- Update Typescript definition
+- Drop ES Modules in favor of Typescript
+
 ## 2.2.0 - 2017-11-22
 
 - Clean up Rollup build

@@ -1,5 +1,7 @@
-import rbush from './lib/rbush';
-import {featureEach, coordEach} from '@turf/meta';
+var rbush = require('rbush');
+var meta = require('@turf/meta');
+var featureEach = meta.featureEach;
+var coordEach = meta.coordEach;
 
 /**
  * GeoJSON implementation of [RBush](https://github.com/mourner/rbush#rbush) spatial index.
@@ -310,4 +312,5 @@ function turfBBox(geojson) {
     return bbox;
 }
 
-export default geojsonRbush;
+module.exports = geojsonRbush;
+module.exports.default = geojsonRbush;

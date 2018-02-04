@@ -2,18 +2,14 @@
   "name": "geojson-rbush",
   "version": "2.2.1",
   "description": "GeoJSON implementation of RBush",
-  "main": "main",
-  "module": "index",
-  "jsnext:main": "index",
+  "main": "index",
   "types": "index.d.ts",
   "files": [
-    "index.d.ts",
     "index.js",
-    "main.js",
-    "lib"
+    "index.d.ts"
   ],
   "scripts": {
-    "pretest": "rollup -f cjs -o main.js index.js",
+    "pretest": "tsc index.d.ts types.ts",
     "test": "node test.js",
     "bench": "node bench.js"
   },
@@ -34,14 +30,14 @@
   "devDependencies": {
     "@turf/random": "*",
     "benchmark": "*",
-    "eslint": "*",
-    "eslint-config-mourner": "*",
     "load-json-file": "*",
-    "rollup": "*",
     "tape": "*",
+    "typescript": "*",
     "write-json-file": "*"
   },
   "dependencies": {
-    "@turf/meta": "*"
+    "@turf/helpers": "6.x",
+    "@turf/meta": "6.x",
+    "rbush": "*"
   }
 }
