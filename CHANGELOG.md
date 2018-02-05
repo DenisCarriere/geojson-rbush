@@ -3,6 +3,7 @@
 
 ## 3.1.0 - 2018-02-05
 
+- Improve coverage testing to 100%
 - Support Array of Features to `.load()` method
 - Allow strict Typing when defining Tree (ex: `const tree = rbush<Polygon>()`)
 - Update documentation

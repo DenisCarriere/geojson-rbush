@@ -4,7 +4,7 @@ const path = require('path');
 const load = require('load-json-file');
 const write = require('write-json-file');
 const bboxPolygon = require('@turf/bbox-polygon');
-const { polygons } = require('@turf/helpers');
+const { polygon, featureCollection, polygons } = require('@turf/helpers');
 const geojsonRbush = require('./').default;
 
 const directories = {
@@ -48,10 +48,32 @@ test('geojson-rbush', t => {
 test('geojson-rbush -- bbox', t => {
     const tree = geojsonRbush();
     tree.insert(bboxPolygon([-150, -60, 150, 60]));
+
     t.equal(tree.collides([-140, -50, 140, 50]), true);
+    t.equal(tree.search([-140, -50, 140, 50]).features.length, 1);
+    t.equal(tree.search(bboxPolygon([-150, -60, 150, 60])).features.length, 1);
+    t.equal(tree.search(featureCollection([bboxPolygon([-150, -60, 150, 60])])).features.length, 1);
     t.equal(tree.collides([-180, -80, -170, -60]), false);
+
+    // Errors
+    t.throws(() => tree.search('foo'));
     t.end();
 });
+
+test('geojson-rbush -- fromJSON', t => {
+    const tree = geojsonRbush();
+    const poly = bboxPolygon([-150, -60, 150, 60])
+    tree.insert(poly);
+
+    const newTree = geojsonRbush()
+    newTree.fromJSON(tree.toJSON())
+    t.equal(newTree.all().features.length, 1)
+    newTree.remove(poly)
+    t.equal(newTree.all().features.length, 0)
+    t.end();
+});
+
+
 
 test('geojson-rbush -- Array of Features -- Issue #5', t => {
     // https://github.com/DenisCarriere/geojson-rbush/issues/5
