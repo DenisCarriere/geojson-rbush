@@ -5,7 +5,7 @@ const load = require('load-json-file');
 const write = require('write-json-file');
 const bboxPolygon = require('@turf/bbox-polygon');
 const { polygons } = require('@turf/helpers');
-const rbush = require('./').default;
+const geojsonRbush = require('./').default;
 
 const directories = {
     in: path.join(__dirname, 'test', 'in') + path.sep,
@@ -25,7 +25,7 @@ test('geojson-rbush', t => {
         const name = fixture.name;
         const filename = fixture.filename;
         const geojson = fixture.geojson;
-        const tree = rbush();
+        const tree = geojsonRbush();
         tree.load(geojson);
 
         // Retrive all features inside the RBush index
@@ -46,7 +46,7 @@ test('geojson-rbush', t => {
 });
 
 test('geojson-rbush -- bbox', t => {
-    const tree = rbush();
+    const tree = geojsonRbush();
     tree.insert(bboxPolygon([-150, -60, 150, 60]));
     t.equal(tree.collides([-140, -50, 140, 50]), true);
     t.equal(tree.collides([-180, -80, -170, -60]), false);
@@ -55,8 +55,7 @@ test('geojson-rbush -- bbox', t => {
 
 test('geojson-rbush -- Array of Features -- Issue #5', t => {
     // https://github.com/DenisCarriere/geojson-rbush/issues/5
-
-    const tree = rbush();
+    const tree = geojsonRbush();
     const polys = polygons([
         [[[-78, 41], [-67, 41], [-67, 48], [-78, 48], [-78, 41]]],
         [[[-93, 32], [-83, 32], [-83, 39], [-93, 39], [-93, 32]]]
