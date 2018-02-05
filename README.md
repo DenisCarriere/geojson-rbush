@@ -37,13 +37,13 @@ GeoJSON implementation of [RBush](https://github.com/mourner/rbush#rbush) spatia
 
 **Parameters**
 
--   `maxEntries` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** defines the maximum number of entries in a tree node. 9 (used by default) is a
+-   `maxEntries` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** defines the maximum number of entries in a tree node. 9 (used by default) is a
     reasonable choice for most applications. Higher value means faster insertion and slower search, and vice versa. (optional, default `9`)
 
 **Examples**
 
 ```javascript
-import geojsonRbush from 'geojson-rbush';
+var geojsonRbush = require('geojson-rbush').default;
 var tree = geojsonRbush();
 ```
 
@@ -55,20 +55,13 @@ Returns **RBush** GeoJSON RBush
 
 **Parameters**
 
--   `feature` **Feature&lt;any>** insert single GeoJSON Feature
+-   `feature` **Feature** insert single GeoJSON Feature
 
 **Examples**
 
 ```javascript
-var polygon = {
-  "type": "Feature",
-  "properties": {},
-  "geometry": {
-    "type": "Polygon",
-    "coordinates": [[[-78, 41], [-67, 41], [-67, 48], [-78, 48], [-78, 41]]]
-  }
-}
-tree.insert(polygon)
+var poly = turf.polygon([[[-78, 41], [-67, 41], [-67, 48], [-78, 48], [-78, 41]]]);
+tree.insert(poly)
 ```
 
 Returns **RBush** GeoJSON RBush
@@ -79,33 +72,16 @@ Returns **RBush** GeoJSON RBush
 
 **Parameters**
 
--   `features` **([Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;BBox> | FeatureCollection&lt;any>)** load entire GeoJSON FeatureCollection
+-   `features` **(FeatureCollection | [Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;Feature>)** load entire GeoJSON FeatureCollection
 
 **Examples**
 
 ```javascript
-var polygons = {
-  "type": "FeatureCollection",
-  "features": [
-    {
-      "type": "Feature",
-      "properties": {},
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [[[-78, 41], [-67, 41], [-67, 48], [-78, 48], [-78, 41]]]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {},
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [[[-93, 32], [-83, 32], [-83, 39], [-93, 39], [-93, 32]]]
-      }
-    }
-  ]
-}
-tree.load(polygons)
+var polys = turf.polygons([
+    [[[-78, 41], [-67, 41], [-67, 48], [-78, 48], [-78, 41]]],
+    [[[-93, 32], [-83, 32], [-83, 39], [-93, 39], [-93, 32]]]
+]);
+tree.load(polys);
 ```
 
 Returns **RBush** GeoJSON RBush
@@ -116,20 +92,15 @@ Returns **RBush** GeoJSON RBush
 
 **Parameters**
 
--   `feature` **(BBox | Feature&lt;any>)** remove single GeoJSON Feature
+-   `feature` **Feature** remove single GeoJSON Feature
+-   `equals` **[Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)** Pass a custom equals function to compare by value for removal.
 
 **Examples**
 
 ```javascript
-var polygon = {
-  "type": "Feature",
-  "properties": {},
-  "geometry": {
-    "type": "Polygon",
-    "coordinates": [[[-78, 41], [-67, 41], [-67, 48], [-78, 48], [-78, 41]]]
-  }
-}
-tree.remove(polygon)
+var poly = turf.polygon([[[-78, 41], [-67, 41], [-67, 48], [-78, 48], [-78, 41]]]);
+
+tree.remove(poly);
 ```
 
 Returns **RBush** GeoJSON RBush
@@ -152,23 +123,17 @@ Returns **RBush** GeoJSON Rbush
 
 **Parameters**
 
--   `geojson` **(BBox | FeatureCollection | Feature&lt;any>)** search with GeoJSON
+-   `geojson` **(BBox | FeatureCollection | Feature)** search with GeoJSON
 
 **Examples**
 
 ```javascript
-var polygon = {
-  "type": "Feature",
-  "properties": {},
-  "geometry": {
-    "type": "Polygon",
-    "coordinates": [[[-78, 41], [-67, 41], [-67, 48], [-78, 48], [-78, 41]]]
-  }
-}
-tree.search(polygon)
+var poly = turf.polygon([[[-78, 41], [-67, 41], [-67, 48], [-78, 48], [-78, 41]]]);
+
+tree.search(poly);
 ```
 
-Returns **FeatureCollection&lt;any>** all features that intersects with the given GeoJSON.
+Returns **FeatureCollection** all features that intersects with the given GeoJSON.
 
 ### collides
 
@@ -176,23 +141,17 @@ Returns **FeatureCollection&lt;any>** all features that intersects with the give
 
 **Parameters**
 
--   `geojson` **(BBox | FeatureCollection | Feature&lt;any>)** collides with GeoJSON
+-   `geojson` **(BBox | FeatureCollection | Feature)** collides with GeoJSON
 
 **Examples**
 
 ```javascript
-var polygon = {
-  "type": "Feature",
-  "properties": {},
-  "geometry": {
-    "type": "Polygon",
-    "coordinates": [[[-78, 41], [-67, 41], [-67, 48], [-78, 48], [-78, 41]]]
-  }
-}
-tree.collides(polygon)
+var poly = turf.polygon([[[-78, 41], [-67, 41], [-67, 48], [-78, 48], [-78, 41]]]);
+
+tree.collides(poly);
 ```
 
-Returns **[boolean](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** true if there are any items intersecting the given GeoJSON, otherwise false.
+Returns **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** true if there are any items intersecting the given GeoJSON, otherwise false.
 
 ### all
 
@@ -202,10 +161,9 @@ Returns **[boolean](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refe
 
 ```javascript
 tree.all()
-//=FeatureCollection
 ```
 
-Returns **FeatureCollection&lt;any>** all the features in RBush
+Returns **FeatureCollection** all the features in RBush
 
 ### toJSON
 
@@ -215,7 +173,6 @@ Returns **FeatureCollection&lt;any>** all the features in RBush
 
 ```javascript
 var exported = tree.toJSON()
-//=JSON object
 ```
 
 Returns **any** export data as JSON object

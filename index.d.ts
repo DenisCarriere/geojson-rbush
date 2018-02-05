@@ -1,19 +1,19 @@
-import { BBox, Feature, FeatureCollection, Geometry } from '@turf/helpers'
+import { BBox, Feature, FeatureCollection, Geometry, Properties } from '@turf/helpers'
 
-declare class RBush {
-    insert(feature: Feature<any> | Geometry | BBox): RBush;
-    load(features: FeatureCollection<any> | BBox[]): RBush;
-    remove<T extends Feature<any> | Geometry | BBox>(feature: T, equals?: (a: T, b: T) => boolean): RBush;
-    clear(): RBush;
-    search<G extends Geometry>(geojson: Feature<G> | FeatureCollection<G> | BBox): FeatureCollection<G>;
+declare class RBush<G extends any, P extends any> {
+    insert(feature: Feature<G, P>): RBush<G, P>;
+    load(features: FeatureCollection<G, P> | Feature<G, P>[]): RBush<G, P>;
+    remove(feature: Feature<G, P>, equals?: (a: Feature<G, P>, b: Feature<G, P>) => boolean): RBush<G, P>;
+    clear(): RBush<G, P>;
+    search(geojson: Feature<G, P> | FeatureCollection<G, P> | BBox): FeatureCollection<G, P>;
     all(): FeatureCollection<any>;
-    collides(geosjon: Feature<any> | FeatureCollection<any> | BBox): boolean;
+    collides(geosjon: Feature<G, P> | FeatureCollection<G, P> | BBox): boolean;
     toJSON(): any;
-    fromJSON(data: any): RBush;
+    fromJSON(data: any): RBush<G, P>;
 }
 
 /**
  * https://github.com/mourner/rbush
  */
-export default function rbush(maxEntries?: number): RBush;
+export default function rbush<G = any, P = any>(maxEntries?: number): RBush<G, P>;
 

@@ -9,9 +9,10 @@
     "index.d.ts"
   ],
   "scripts": {
-    "pretest": "tsc index.d.ts types.ts",
+    "pretest": "tsc types.ts",
     "test": "node test.js",
-    "bench": "node bench.js"
+    "bench": "node bench.js",
+    "docs": "documentation readme index.js --section=API"
   },
   "keywords": [
     "geojson",
@@ -28,14 +29,18 @@
   ],
   "license": "MIT",
   "devDependencies": {
+    "@turf/bbox-polygon": "*",
     "@turf/random": "*",
+    "@types/node": "*",
     "benchmark": "*",
+    "documentation": "*",
     "load-json-file": "*",
     "tape": "*",
     "typescript": "*",
     "write-json-file": "*"
   },
   "dependencies": {
+    "@turf/bbox": "*",
     "@turf/helpers": "6.x",
     "@turf/meta": "6.x",
     "rbush": "*"

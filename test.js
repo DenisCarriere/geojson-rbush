@@ -3,7 +3,9 @@ const test = require('tape');
 const path = require('path');
 const load = require('load-json-file');
 const write = require('write-json-file');
-const geojsonRbush = require('./');
+const bboxPolygon = require('@turf/bbox-polygon');
+const { polygons } = require('@turf/helpers');
+const rbush = require('./').default;
 
 const directories = {
     in: path.join(__dirname, 'test', 'in') + path.sep,
@@ -23,7 +25,7 @@ test('geojson-rbush', t => {
         const name = fixture.name;
         const filename = fixture.filename;
         const geojson = fixture.geojson;
-        const tree = geojsonRbush();
+        const tree = rbush();
         tree.load(geojson);
 
         // Retrive all features inside the RBush index
@@ -44,9 +46,27 @@ test('geojson-rbush', t => {
 });
 
 test('geojson-rbush -- bbox', t => {
-    const tree = geojsonRbush();
-    tree.insert([-150, -60, 150, 60]);
+    const tree = rbush();
+    tree.insert(bboxPolygon([-150, -60, 150, 60]));
     t.equal(tree.collides([-140, -50, 140, 50]), true);
     t.equal(tree.collides([-180, -80, -170, -60]), false);
+    t.end();
+});
+
+test('geojson-rbush -- Array of Features -- Issue #5', t => {
+    // https://github.com/DenisCarriere/geojson-rbush/issues/5
+
+    const tree = rbush();
+    const polys = polygons([
+        [[[-78, 41], [-67, 41], [-67, 48], [-78, 48], [-78, 41]]],
+        [[[-93, 32], [-83, 32], [-83, 39], [-93, 39], [-93, 32]]]
+    ]);
+    // Load Feature Collection
+    tree.load(polys);
+    t.equal(tree.all().features.length, 2);
+
+    // Load Array of Features
+    tree.load(polys.features);
+    t.equal(tree.all().features.length, 4);
     t.end();
 });

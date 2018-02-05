@@ -1,4 +1,4 @@
-import { BBox, point, polygon, featureCollection} from '@turf/helpers'
+import { BBox, point, polygon, featureCollection, Polygon} from '@turf/helpers'
 import rbush from './'
 
 // Fixtures
@@ -33,6 +33,5 @@ tree.remove(pt)
 tree.remove(poly)
 
 // BBox support
-tree.insert(bbox)
 tree.search(bbox)
 tree.collides(bbox)

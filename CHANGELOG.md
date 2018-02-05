@@ -1,6 +1,15 @@
 
 # Changelog
 
+## 3.1.0 - 2018-02-05
+
+- Support Array of Features to `.load()` method
+- Allow strict Typing when defining Tree (ex: `const tree = rbush<Polygon>()`)
+- Update documentation
+- Add `equals` param to `.remove()` method
+- Drop BBox from search/remove methods
+- Add support for 6 position BBox
+
 ## 3.0.0 - 2018-02-04
 
 - Update Typescript definition
