@@ -3,7 +3,7 @@ const test = require('tape');
 const path = require('path');
 const load = require('load-json-file');
 const write = require('write-json-file');
-const bboxPolygon = require('@turf/bbox-polygon');
+const bboxPolygon = require('@turf/bbox-polygon').default;
 const { polygon, featureCollection, polygons } = require('@turf/helpers');
 const geojsonRbush = require('./').default;
 
