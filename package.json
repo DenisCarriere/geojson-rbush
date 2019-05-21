@@ -44,6 +44,6 @@
     "@turf/bbox": "*",
     "@turf/helpers": "6.x",
     "@turf/meta": "6.x",
-    "rbush": "*"
+    "rbush": "^2.0.0"
   }
 }
