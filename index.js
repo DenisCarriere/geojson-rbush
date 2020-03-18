@@ -19,7 +19,7 @@ var featureCollection = helpers.featureCollection;
  * var tree = geojsonRbush();
  */
 function geojsonRbush(maxEntries) {
-    var tree = rbush(maxEntries);
+    var tree = new rbush(maxEntries);
     /**
      * [insert](https://github.com/mourner/rbush#data-format)
      *
