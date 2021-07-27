@@ -44,6 +44,7 @@
     "@turf/bbox": "*",
     "@turf/helpers": "6.x",
     "@turf/meta": "6.x",
+    "@types/geojson": "7946.0.8",
     "rbush": "^2.0.0"
   }
 }
