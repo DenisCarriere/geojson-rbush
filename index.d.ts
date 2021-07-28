@@ -15,5 +15,5 @@ declare class RBush<G extends Geometry, P extends GeoJsonProperties> {
 /**
  * https://github.com/mourner/rbush
  */
-export default function rbush<G extends Geometry = Geometry, P = any>(maxEntries?: number): RBush<G, P>;
+export default function rbush<G = Geometry, P = GeoJsonProperties>(maxEntries?: number): RBush<G, P>;
 
