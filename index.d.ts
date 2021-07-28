@@ -1,6 +1,6 @@
-import { BBox, Feature, FeatureCollection, Geometry, GeometryCollection, GeometryObject, GeoJsonProperties } from 'geojson'
+import { BBox, Feature, FeatureCollection, Geometry, GeoJsonProperties } from 'geojson'
 
-declare class RBush<G extends GeometryObject, P extends GeoJsonProperties> {
+declare class RBush<G extends Geometry, P extends GeoJsonProperties> {
     insert(feature: Feature<G, P>): RBush<G, P>;
     load(features: FeatureCollection<G, P> | Feature<G, P>[]): RBush<G, P>;
     remove(feature: Feature<G, P>, equals?: (a: Feature<G, P>, b: Feature<G, P>) => boolean): RBush<G, P>;
@@ -15,5 +15,5 @@ declare class RBush<G extends GeometryObject, P extends GeoJsonProperties> {
 /**
  * https://github.com/mourner/rbush
  */
-export default function rbush<G extends GeometryObject = Geometry | GeometryCollection, P = any>(maxEntries?: number): RBush<G, P>;
+export default function rbush<G extends Geometry = Geometry, P = any>(maxEntries?: number): RBush<G, P>;
 
