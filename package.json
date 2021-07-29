@@ -1,6 +1,6 @@
 {
   "name": "geojson-rbush",
-  "version": "3.1.2",
+  "version": "3.2.0",
   "description": "GeoJSON implementation of RBush",
   "main": "index",
   "types": "index.d.ts",
@@ -10,7 +10,7 @@
   ],
   "scripts": {
     "pretest": "tsc types.ts",
-    "test": "tap test.js --coverage",
+    "test": "node test.js --coverage",
     "bench": "node bench.js",
     "docs": "documentation readme index.js --section=API"
   },
@@ -45,6 +45,6 @@
     "@turf/helpers": "6.x",
     "@turf/meta": "6.x",
     "@types/geojson": "7946.0.8",
-    "rbush": "^2.0.0"
+    "rbush": "^3.0.1"
   }
 }
