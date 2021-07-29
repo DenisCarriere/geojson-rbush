@@ -1,4 +1,5 @@
-import { BBox, point, polygon, featureCollection, Polygon} from '@turf/helpers'
+import { point, polygon, featureCollection } from '@turf/helpers'
+import { BBox } from 'geojson'
 import rbush from './'
 
 // Fixtures

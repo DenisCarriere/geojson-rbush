@@ -1,6 +1,6 @@
-import { BBox, Feature, FeatureCollection, Geometry, Properties } from '@turf/helpers'
+import { BBox, Feature, FeatureCollection, Geometry, GeoJsonProperties } from 'geojson'
 
-declare class RBush<G extends any, P extends any> {
+declare class RBush<G extends Geometry, P extends GeoJsonProperties> {
     insert(feature: Feature<G, P>): RBush<G, P>;
     load(features: FeatureCollection<G, P> | Feature<G, P>[]): RBush<G, P>;
     remove(feature: Feature<G, P>, equals?: (a: Feature<G, P>, b: Feature<G, P>) => boolean): RBush<G, P>;
@@ -15,5 +15,5 @@ declare class RBush<G extends any, P extends any> {
 /**
  * https://github.com/mourner/rbush
  */
-export default function rbush<G = any, P = any>(maxEntries?: number): RBush<G, P>;
+export default function rbush<G extends Geometry = Geometry, P = GeoJsonProperties>(maxEntries?: number): RBush<G, P>;
 
