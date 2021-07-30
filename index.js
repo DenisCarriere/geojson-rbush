@@ -1,4 +1,4 @@
-var rbush = require('rbush');
+var rbush = require('rbush/rbush');
 var helpers = require('@turf/helpers');
 var meta = require('@turf/meta');
 var turfBBox = require('@turf/bbox').default;
